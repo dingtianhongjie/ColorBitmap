@@ -2,8 +2,10 @@ package com.example.soltmember.colorbitmap;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -14,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         onWindowFocusChanged(false);
+
 
 //        try {
 //
@@ -53,25 +56,35 @@ public class MainActivity extends AppCompatActivity {
 
         TextView textRed = findViewById(R.id.textRed);
         TextView textGreen = findViewById(R.id.textGreen);
+        TextView textBlue = findViewById(R.id.textBlue);
 
-        String stWidth = String.valueOf(width);
-        String stHeight = String.valueOf(height);
+//        String stWidth = String.valueOf(width);
+//        String stHeight = String.valueOf(height);
+//
+//        textRed.setText(stWidth);
+//        textGreen.setText(stHeight);
 
-        textRed.setText(stWidth);
-        textGreen.setText(stHeight);
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(),
+                R.drawable.area_1201_1);
+        int pixs[] = new int[(width * height) + 1];
 
-//        int pix[] = new int[width * height];
-//
-//        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.id.imageEbisu);
-//        bitmap.getPixels(pix, 0, width, width / 2, height / 2, 1, 1);
-//
-//        String stRed = String.valueOf(pix[0]);
-//        String stGreen = String.valueOf(pix[1]);
-//
-//        TextView textRed = findViewById(R.id.textRed);
-//        TextView textGreen = findViewById(R.id.textGreen);
-//        textRed.setText(stRed);
-//        textGreen.setText(stGreen);
+        bitmap.getPixels(pixs, 0, width,
+                0, 0, width, height);
+
+        int pix = pixs[width * 2];
+        int r = Color.red(pix);
+        int g = Color.green(pix);
+        int b = Color.blue(pix);
+
+        Log.d("RED", String.valueOf(r));
+        Log.d("GREEN", String.valueOf(g));
+        Log.d("BLUE", String.valueOf(b));
+
+        textRed.setText(String.valueOf(r));
+        textGreen.setText(String.valueOf(g));
+        textBlue.setText(String.valueOf(b));
+
+
 
 
     }
